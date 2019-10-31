@@ -15,6 +15,7 @@
 # B B B
 import random, pprint
 
+# OPTIMIZE: 
 def create_matrix_rgb(row_size, col_size):
     colors = ['R', 'G', 'B']
     matrix = []
@@ -24,6 +25,7 @@ def create_matrix_rgb(row_size, col_size):
             matrix[row].append(colors[random.randint(0,2)])
     return matrix
 
+# OPTIMIZE: 
 def replace_adj_pixl(node, matrix, change_color):
     colors = ['R', 'G', 'B', '*']
 

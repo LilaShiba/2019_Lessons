@@ -172,7 +172,7 @@ def scale_data(df):
 # feature engineering    
 
 print('loading data')
-df = pd.read_csv('./nyc_taxi_data.csv', parse_dates=['pickup_datetime'], nrows=500000)
+df = pd.read_csv('../../../../kaggle_data/nyc_taxi.csv', parse_dates=['pickup_datetime'], nrows=500000)
 # clean and feature engineering
 df = process_data(df)
 # visualize(df)
@@ -196,33 +196,38 @@ model.add(Dense(1))
 model.summary()
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 model.fit(X_train, y_train, epochs=1)
+data = model.predict(X_test)
+# TODO: GET KEY TO ADD TO SUBMISSION DF
+submission = pd.DataFrame(data)
+print(submission.head())
+print(X_train.head())
 
-# Results
-train_pred = model.predict(X_train)
-train_rmse = np.sqrt(mean_squared_error(y_train, train_pred))
-test_pred = model.predict(X_test)
-test_rmse = np.sqrt(mean_squared_error(y_test, test_pred))
-print("Train RMSE: {:0.2f}".format(train_rmse))
-print("Test RMSE: {:0.2f}".format(test_rmse))
-print('------------------------')
-
-def predict_random(df_prescaled, X_test, model):
-    sample = X_test.sample(n=1, random_state=np.random.randint(low=0, high=10000))
-    idx = sample.index[0]
-
-    actual_fare = df_prescaled.loc[idx,'fare_amount']
-    day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    day_of_week = day_names[df_prescaled.loc[idx,'day_of_week']]
-    hour = df_prescaled.loc[idx,'hour']
-    predicted_fare = model.predict(sample)[0][0]
-    rmse = np.sqrt(np.square(predicted_fare-actual_fare))
-
-    print("Trip Details: {}, {}:00hrs".format(day_of_week, hour))  
-    print("Actual fare: ${:0.2f}".format(actual_fare))
-    print("Predicted fare: ${:0.2f}".format(predicted_fare))
-    print("RMSE: ${:0.2f}".format(rmse))
-
-predict_random(df_prescaled, X_test, model)
+# # Results
+# train_pred = model.predict(X_train)
+# train_rmse = np.sqrt(mean_squared_error(y_train, train_pred))
+# test_pred = model.predict(X_test)
+# test_rmse = np.sqrt(mean_squared_error(y_test, test_pred))
+# print("Train RMSE: {:0.2f}".format(train_rmse))
+# print("Test RMSE: {:0.2f}".format(test_rmse))
+# print('------------------------')
+# 
+# def predict_random(df_prescaled, X_test, model):
+#     sample = X_test.sample(n=1, random_state=np.random.randint(low=0, high=10000))
+#     idx = sample.index[0]
+# 
+#     actual_fare = df_prescaled.loc[idx,'fare_amount']
+#     day_names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+#     day_of_week = day_names[df_prescaled.loc[idx,'day_of_week']]
+#     hour = df_prescaled.loc[idx,'hour']
+#     predicted_fare = model.predict(sample)[0][0]
+#     rmse = np.sqrt(np.square(predicted_fare-actual_fare))
+# 
+#     print("Trip Details: {}, {}:00hrs".format(day_of_week, hour))  
+#     print("Actual fare: ${:0.2f}".format(actual_fare))
+#     print("Predicted fare: ${:0.2f}".format(predicted_fare))
+#     print("RMSE: ${:0.2f}".format(rmse))
+# 
+# predict_random(df_prescaled, X_test, model)
 
 
 

@@ -158,6 +158,8 @@ def visualize(df):
 def scale_data(df):
     df_prescaled = df.copy()
     df_scaled = df.drop(['fare_amount'], axis=1)
+    #df_scaled = df_scaled.drop(['key'], axis=1)
+
     # scale features
     df_scaled = scale(df_scaled)
     # transform into pd data frame 
@@ -175,6 +177,7 @@ print('loading data')
 df = pd.read_csv('../../../../kaggle_data/nyc_taxi.csv', parse_dates=['pickup_datetime'], nrows=500000)
 # clean and feature engineering
 df = process_data(df)
+df_key = df.copy()
 # visualize(df)
 # scale data for network
 df, df_prescaled = scale_data(df) 
@@ -202,15 +205,13 @@ submission = pd.DataFrame(data)
 print(submission.head())
 print(X_train.head())
 
-# # Results
-# train_pred = model.predict(X_train)
-# train_rmse = np.sqrt(mean_squared_error(y_train, train_pred))
-# test_pred = model.predict(X_test)
-# test_rmse = np.sqrt(mean_squared_error(y_test, test_pred))
-# print("Train RMSE: {:0.2f}".format(train_rmse))
-# print("Test RMSE: {:0.2f}".format(test_rmse))
-# print('------------------------')
-# 
+def create_output(df_prescaled, X_test, model):
+    for x in df_prescaled:
+        # idx = x.index[0]
+
+        # actual_fare = df_prescaled.loc[idx,'fare_amount']
+        print(x)
+
 # def predict_random(df_prescaled, X_test, model):
 #     sample = X_test.sample(n=1, random_state=np.random.randint(low=0, high=10000))
 #     idx = sample.index[0]
@@ -226,8 +227,8 @@ print(X_train.head())
 #     print("Actual fare: ${:0.2f}".format(actual_fare))
 #     print("Predicted fare: ${:0.2f}".format(predicted_fare))
 #     print("RMSE: ${:0.2f}".format(rmse))
-# 
-# predict_random(df_prescaled, X_test, model)
+
+create_output(df_key, X_test, model)
 
 
 

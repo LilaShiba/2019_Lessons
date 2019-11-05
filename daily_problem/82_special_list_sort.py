@@ -17,7 +17,7 @@ def sort_p(arr, start, end):
 
 # pancake sorting
 # 
-https://en.wikipedia.org/wiki/Pancake_sorting
+#https://en.wikipedia.org/wiki/Pancake_sorting
 
 
 print(sort_p([1,2,3,4,5],0,3))

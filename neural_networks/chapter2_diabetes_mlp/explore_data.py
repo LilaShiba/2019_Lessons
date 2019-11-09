@@ -8,10 +8,10 @@ from keras.models import Sequential
 from keras.layers import Dense
 df = pd.read_csv('diabetes.csv')
 
-#print(df.head())
-# shows interesting facts about age group, missing values, and bell curves
-# df.hist(figsize=(10,7))
-# plt.show()
+print(df.head())
+#shows interesting facts about age group, missing values, and bell curves
+df.hist(figsize=(10,7))
+plt.show()
 
 # for col in df.columns:
 #     sns.scatterplot(x=col, y='Glucose', data=df, hue="Outcome")
@@ -33,9 +33,9 @@ for col in df.columns:
 # check null and 0 responses
 # print(df.isnull().any())
 #
-# for col in df.columns:
-#     missing_rows = df.loc[df[col]==0].shape[0]
-#     print(col + ": "+ str(missing_rows))
+for col in df.columns:
+    missing_rows = df.loc[df[col]==0].shape[0]
+    print(col + ": "+ str(missing_rows))
 
 
 # scale data as features have vastly different scales, e.g. mins and maxes

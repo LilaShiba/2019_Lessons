@@ -20,13 +20,14 @@ def process_data(df):
     df['hour'] = df['pickup_datetime'].dt.hour
     
     def create_time_features(df):
+        df_key = pd.DataFrame(data = df['key'])
         df['year'] = df['pickup_datetime'].dt.year
         df['month'] = df['pickup_datetime'].dt.month
         df['day'] = df['pickup_datetime'].dt.day
         df['day_of_week'] = df['pickup_datetime'].dt.dayofweek
         df['hour'] = df['pickup_datetime'].dt.hour
         df = df.drop(['pickup_datetime'], axis=1)
-        df = df.drop(['key'], axis=1)
+        #df = df.drop(['key'], axis=1)
         return df
     
     # preprocess data
@@ -90,6 +91,7 @@ def process_data(df):
     df = create_time_features(df)
     print('Creating distance features')
     df = make_distance(df)
+    print('Processing data done')
     return df
 
 def visualize(df):
@@ -156,11 +158,13 @@ def visualize(df):
     plot_lat_lon(df, landmarks, points='Dropoff')
 
 def scale_data(df):
-    df_prescaled = df.copy()
+    df_prescaled = df['key']
     df_scaled = df.drop(['fare_amount'], axis=1)
+    df_scaled = df.drop(['key'], axis=1)
     #df_scaled = df_scaled.drop(['key'], axis=1)
 
     # scale features
+    print('scaling data')
     df_scaled = scale(df_scaled)
     # transform into pd data frame 
     # add in fare amount from prescale
@@ -174,13 +178,16 @@ def scale_data(df):
 # feature engineering    
 
 print('loading data')
-df = pd.read_csv('../../../../kaggle_data/nyc_taxi.csv', parse_dates=['pickup_datetime'], nrows=500000)
+df = pd.read_csv('../../../../kaggle_data/nyc_taxi.csv', parse_dates=['pickup_datetime'], nrows=50000)
+# keep data
+df_key = df.copy()
 # clean and feature engineering
 df = process_data(df)
-df_key = df.copy()
 # visualize(df)
 # scale data for network
 df, df_prescaled = scale_data(df) 
+print('add key back in before model')
+print(df.head())
 
 # Neural Network
 # independent and dependent variables
@@ -200,18 +207,6 @@ model.summary()
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 model.fit(X_train, y_train, epochs=1)
 data = model.predict(X_test)
-# TODO: GET KEY TO ADD TO SUBMISSION DF
-submission = pd.DataFrame(data)
-print(submission.head())
-print(X_train.head())
-
-def create_output(df_prescaled, X_test, model):
-    for x in df_prescaled:
-        # idx = x.index[0]
-
-        # actual_fare = df_prescaled.loc[idx,'fare_amount']
-        print(x)
-
 # def predict_random(df_prescaled, X_test, model):
 #     sample = X_test.sample(n=1, random_state=np.random.randint(low=0, high=10000))
 #     idx = sample.index[0]
@@ -228,7 +223,6 @@ def create_output(df_prescaled, X_test, model):
 #     print("Predicted fare: ${:0.2f}".format(predicted_fare))
 #     print("RMSE: ${:0.2f}".format(rmse))
 
-create_output(df_key, X_test, model)
 
 
 

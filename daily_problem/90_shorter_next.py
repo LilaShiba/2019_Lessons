@@ -11,6 +11,7 @@
 # There are 2 smaller elements to the right of 9
 # There is 1 smaller element to the right of 6
 # There are no smaller elements to the right of 1
+import bisect
 
 def naive(lst):
     ans = []
@@ -34,9 +35,20 @@ def naive1(lst):
             if next_num < current_num:
                 count += 1
         ans.append(count)
-    print(ans)
-            
+    return ans
 
-        
+def bisect_shorter_than(lst):
+    ans = []
+    s = []
+    for num in reversed(lst):
+        i = bisect.bisect_left(s,num)
+        ans.append(i)
+        bisect.insort(s, num)       
+    return list(reversed(ans))
+    
+    
+import random
+test1 = [random.randint(0,1000) for num in range(10)]        
 arr = [3, 4, 9, 6, 1]  
-print(naive2(arr))      
+print(bisect_shorter_than(test1))   
+print(naive1(test1))   

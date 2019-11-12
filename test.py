@@ -18,6 +18,7 @@ def safe(cx,cy,length,cache):
         if 0 <= cx < length and 0 <= cy < length:
             return True
     return False
+    
 def bfs(cache, matrix, start, areas):
     length = len(matrix)
     unseenNodes = [start]

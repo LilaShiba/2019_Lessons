@@ -22,7 +22,7 @@ def spiral(matrix):
         if should_change(possiable_position[0], possiable_position[1], matrix):
 
             next_move = next_direction(current_direction)
-            print(next_move)
+            #print(next_move)
             possiable_position = next_position(current_position, next_move)
             current_direction = next_move
 

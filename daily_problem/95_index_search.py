@@ -18,15 +18,15 @@ def find_us(s, words):
     n = len(s)
     
     for char in range(n-len_1):
-        if s[char:char+len_1] == word1:
-            found = (char, s[char:char+len_1])
+        if s[char:char+len_1+len_2] == word1+word2:
+            found = (char, s[char:char+len_1+len_2])
             ans.append(found)
             break
     
             
     for idx in range(n-len_2):
-        if s[idx:idx+len_2] == word2:
-            found = (idx, s[idx:idx+len_2])
+        if s[idx:idx+len_2+len_1] == word2+word1:
+            found = (idx, s[idx:idx+len_2+len_1])
             ans.append(found)
             break
         

@@ -23,5 +23,25 @@ def flatten_d(dd, sep='.'):
         else:
             ans[key] = value
     return ans
+    
+def flatten_dd(dd, sep='.'):
+    ans = {}
+    for key,value in dd.items():
+        if type(value) is dict:
+            ans = make_flat(key, value, ans)
+        else:
+            ans[key] = value
+    return ans
 
+def make_flat(key, val, ans):
+    for fkey, fvalue in val.items():
+        if type(fvalue) is dict:
+            new_key = key + '.' + fkey
+            ans = make_flat(new_key, fvalue, ans)
+        else:
+            ans[key + '.' + fkey] = fvalue
+    return ans
+
+print(flatten_dd(test_dict))
 print(flatten_d(test_dict))
+

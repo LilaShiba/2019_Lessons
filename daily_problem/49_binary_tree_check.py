@@ -14,7 +14,20 @@ def binary_tree_check(root, l=None, r=None):
     if (r != None and root.data >= r.data):
         return False
     return binary_tree_check(root.left, l, root) and binary_tree_check(root.right, root, r)
-        
+
+def isValidBST(root) :
+    stack, inorder = [], float('-inf')
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        if root.val <= inorder:
+            return False
+            
+        inorder = root.val
+        root = root.right
+    return True    
         
     
 root = Node(10)
@@ -29,4 +42,7 @@ print(binary_tree_check(root))
         #             10
         #         6       12
         # 1   5               50  100 
+        
+        
+
     

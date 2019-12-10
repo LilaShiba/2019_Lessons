@@ -29,7 +29,7 @@ def get_mean(node,ans=[]):
             cache[x] = 1
         else:
             cache[x] += 1
-    return max(cache)
+    
     
 def get_most(root):
     if not root:

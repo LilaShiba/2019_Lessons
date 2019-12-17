@@ -43,6 +43,12 @@ def arr_heavy_path(arr,lvl=0,idx=0):
     else:
         return arr[lvl][idx] + max(arr_heavy_path(arr,lvl+1,idx), arr_heavy_path(arr, lvl+1, idx+1))
 
+def dp_heavy_path(arr):
+    for x in range(len(arr)-2,-1,-1):
+        for y in range(x+1):
+            arr[x][y] += max(arr[x+1][y], arr[x+1][y+1])
+    return arr[0][0]
+
 
         
 arr1 = [
@@ -52,7 +58,7 @@ arr1 = [
 ]
 
 print(arr_heavy_path(arr1))
-
+print(dp_heavy_path(arr1))
 
 
 

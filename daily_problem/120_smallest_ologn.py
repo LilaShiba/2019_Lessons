@@ -36,7 +36,32 @@ def merge_sort(arr):
             j+=1
             k+=1
     return arr[0]
-        
+
+def bsearch(arr, low, hi):
+    # END CASE
+    if hi == low:
+        return arr[low]
+    
+    mid = (hi + low)//2
+    if arr[mid] < arr[hi]:
+        hi = mid
+    else:
+        low = mid + 1
+    return bsearch(arr, low, hi)
+
+def iterative_bsearch(arr):
+    low, hi = 0, len(arr)-1
+    while low != hi:
+        mid = (low+hi)//2
+        if arr[mid] < arr[hi]:
+            hi = mid
+        else:
+            low = mid + 1
+    return arr[mid]
+    
+            
         
 arr = [5, 7, 10, 3, 4]
 print(merge_sort(arr))
+print(bsearch(arr, 0, len(arr)-1))  
+print(iterative_bsearch(arr))  

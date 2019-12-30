@@ -75,16 +75,13 @@ class Graph:
     
 
 adj_list = {
-0: [3],
-1: [2,3],
-2: [1,3,5],
-3: [4,5],
-4: [2],
-5: [1,4]
+0: [1],
+1: [2],
+2: [3],
+3: [4],
+4: [5],
+5: [0]
 }
-
-
-    
 
 def bipartite(adj_list, colors=[]):
     if len(colors) == len(adj_list):
@@ -142,6 +139,7 @@ def is_bipartite(graph):
 g = Graph(adj_list)
 g.make_matrix(adj_list)
 g.showGraph()
-print(g.backtrack(5))
+print(g.backtrack(2))
+print(is_bipartite(adj_list))
 #print(g.back_driver(2))
 #print(g.is_bipartite(adj_list))

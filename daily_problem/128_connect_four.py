@@ -126,6 +126,7 @@ board = Board()
 piece = 1
 past_move = (0,0)
 won = False
+checks = ['col', 'row', 'l_dia', 'r_dia']
 
 
 while won == False:
@@ -135,7 +136,10 @@ while won == False:
   _, past_move = board.make_move(user_move, piece)
   #won, path = board.check_row(past_move, piece)
   #won, path = board.check_col(past_move, piece)
-  won, path = board.bfs(past_move, piece, 'l_dia')
+  for check in checks:
+      won, path = board.bfs(past_move, piece, check)
+      if won == True:
+          break
   if piece == 1:
     piece = 2
   elif piece == 2:

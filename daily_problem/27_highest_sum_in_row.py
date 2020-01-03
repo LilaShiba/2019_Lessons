@@ -26,7 +26,7 @@ def highSum(arr):
 
 
 # This algorithm is known as Kadane's algorithm, and it runs in O(N) time and O(1) space.
-def max_subarray_sum(arr):
+def kadens(arr):
   max_ending_here = max_so_far = 0
   for x in arr:
     # ensures positive
@@ -41,5 +41,5 @@ if __name__ == '__main__':
   print(highSum(arr))
   arr2 = [-5, -1, -8, -9]
   print(highSum(arr2))
-  print(max_subarray_sum(arr))
-  print(max_subarray_sum(arr2))
+  print(kadens(arr))
+  print(kadens(arr2))

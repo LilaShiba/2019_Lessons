@@ -130,12 +130,9 @@ checks = ['col', 'row', 'l_dia', 'r_dia']
 
 
 while won == False:
-  
   print('it is player ', piece, 'turn to go')
   user_move = int(input("what col?"))
   _, past_move = board.make_move(user_move, piece)
-  #won, path = board.check_row(past_move, piece)
-  #won, path = board.check_col(past_move, piece)
   for check in checks:
       won, path = board.bfs(past_move, piece, check)
       if won == True:

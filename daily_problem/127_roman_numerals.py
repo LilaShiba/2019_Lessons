@@ -13,6 +13,16 @@ roman_numerals = {
     'I': 1
 }
 
+numerals_roman = {
+    1000: 'M',
+    500:  'D',
+    100:  'C',
+    50:   'L',
+    10:   'X',
+    5:    'V',
+    1:    'I'
+}
+
 # In addition, note that the Roman numeral system 
 # uses subtractive notation for numbers such as IV and XL.
 # 
@@ -23,6 +33,9 @@ a1 = 14
 q2 = "MCCXIV"
 a2 = 1214
 
+def num_to_roman(num):
+    pass
+    
 def make_roman1(num):
     total = 0
     for i in range(len(num)-1):

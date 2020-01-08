@@ -6,6 +6,7 @@ def sum_of_squares(a):
 def vector_size(a):
     return np.sqrt(sum([x*x for x in a]))
 
+# (a[0] * b[0]) + (a[1] * b[1]) + ...nth
 def dot_product(a,b):
     dp = 0
     for x in range(len(a)):
@@ -13,6 +14,7 @@ def dot_product(a,b):
     return dp 
 
 # a onto b
+# a.b/|b|
 def scalar_projection(a,b):
     return dot_product(a,b)/vector_size(b)
 
@@ -25,6 +27,7 @@ def vector_projection(a,b):
     second_half = [first_half*x for x in b]
     return [x/modb for x in second_half]
 
+# r.x / sum_of_squares(x)
 def basis_change(r, vectors):
     ans = []
     for x in vectors:
@@ -33,7 +36,7 @@ def basis_change(r, vectors):
         ans.append(top/bottom)
     return ans
     
-
+    
 s = [3,2,4]
 r = [-1,2-3]
 #print(vector_size(r))

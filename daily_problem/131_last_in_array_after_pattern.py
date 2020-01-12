@@ -29,14 +29,52 @@ def best_spot2(n,k):
         r = (r+k)%i
     return r
         
+def last_standing(n, k):
+    # make arr for people starting at 1
+    people = [x for x in range(1, n+1)]
+    # counting bro
+    idx = k-1
+    # hold order
+    ans = []
+    while n > 1:
+        # add to ans
+        ans.append(people[idx])
+        # remove from circle
+        people.pop(idx)
+        # new idx + counting brah. The mod returns how much we went over length
+        idx = (idx+k-1)%len(people)
+        # increament to end this
+        n-=1
+    return people, ans       
         
+def k_stance(n,k):
+    people = [n for n in range(1, n+1)]
+    idx = k-1
+    ans = []
+    
+    while n > 1:
+        ans.append(people[idx])
+        people.pop(idx)
+        idx = (idx + k-1) % len(people)
+        n -= 1
+    return people, ans
         
-        
+def k_stance2(n,k): 
+    people = [x for x in range(1, n+1)] 
+    ans = []
+    idx = k-1
+    
+    while n > 1:
+        ans.append(people[idx])
+        people.pop(idx)
+        idx = (idx + k-1) % len(people)
+        n -= 1
+    return people, ans      
 
 print(best_spot(5,2))
-
 print(best_spot2(5,2))
-
+print(last_standing(5,2))
+print(k_stance2(5,2))
 # 
 # After the first person (kth from beginning) is killed, n-1 persons are left. 
 # So we call josephus(n – 1, k) to get the position with n-1 persons. But 

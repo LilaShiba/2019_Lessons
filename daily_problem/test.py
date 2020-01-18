@@ -29,6 +29,7 @@ def combos(arr):
 
 
 
+
     
 if __name__ == '__main__':
     mapping = {'1': ['a','b','c'], '2':['d','e','f'], '3':['h','i','j']}

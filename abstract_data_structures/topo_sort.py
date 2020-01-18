@@ -31,6 +31,24 @@ def topo(adj_list):
     for node in adj_list:
         dfs_helper(adj_list, visited, node, order)
     return visited
+    
+    
+def search(adj_list, visited, node, order):
+    if node not in visited:
+        visited.append(node)
+        order.append(node)
+        for edge in adj_list[node]:
+            search(adj_list, visited, edge, order)
+        return order
+
+def t(adj_list):
+    visited = []
+    order = []
+    for vertex in adj_list:
+        search(adj_list, visited, vertex, order)
+    return order
+    
+    
 adj_list = {
     1:[2],
     2:[3],
@@ -67,3 +85,4 @@ graph = { "a" : ["c"],
 print(topo_sort(graph))
 print(topo(graph))
 print(tp(graph))
+print(t(graph))

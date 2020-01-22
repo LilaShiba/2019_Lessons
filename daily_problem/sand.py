@@ -58,22 +58,69 @@
 # print(ts(graph))
 # print(make_trie(words))
 
-def fib(n):
-    if n <= 1:
-        return n
-    else:
-        a, b = 0, 1
-        for _ in range(n - 1):
-            a, b = b, a + b
-        return b
+# def fib(n):
+#     if n <= 1:
+#         return n
+#     else:
+#         a, b = 0, 1
+#         for _ in range(n - 1):
+#             a, b = b, a + b
+#         return b
+# 
+# def fib1(n):
+#     if n <= 1:
+#         return n 
+#     else:
+#         for _ in range(n):
+#             a,b = b, a+b 
+#         return a
+# 
+# print(fib(15))
+# print(fib(15))
 
-def fib1(n):
-    if n <= 1:
-        return n 
-    else:
-        for _ in range(n):
-            a,b = b, a+b 
-        return a
-        
-print(fib(15))
-print(fib(15))
+# adj_list = {
+# 0: [1],
+# 1: [2],
+# 2: [3,1],
+# 3: [4],
+# 4: [5],
+# 5: [0]
+# }
+# 
+# def is_safe(adj_list, perm, ans):
+#     last_perm = ans[-1]
+#     last_vertex = len(ans)-1
+#     to_check = [x for x in adj_list[last_vertex] if x < last_vertex]
+# 
+#     for x in to_check:
+#         if ans[x] == last_perm:
+#             return False
+#     return True
+# 
+# def back_track(adj_list, magic_num, ans):
+#     if len(ans) == len(adj_list):
+#         return True
+#     for perm in range(magic_num):
+#         ans.append(perm)
+#         if is_safe(adj_list, perm, ans):
+#             if back_track(adj_list, magic_num, ans):
+#                 return True, ans
+#         ans.pop()
+#     return False
+# 
+# print(back_track(adj_list, 2, []))
+
+def make_trie(words):
+    trie = {}
+    for word in words:
+        current_trie = trie
+        for letter in word:
+            current_trie= current_trie.setdefault(letter, {})
+        current_trie['#'] = '#'
+    return trie
+    
+    
+            
+            
+words = ['taco', 'cat', 'tacocat']
+print(make_trie(words))

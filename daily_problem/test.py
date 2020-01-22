@@ -33,6 +33,6 @@ def combos(arr):
     
 if __name__ == '__main__':
     mapping = {'1': ['a','b','c'], '2':['d','e','f'], '3':['h','i','j']}
-    # print(all_mapping_combos(['1','2','3'], mapping))
+    print(all_mapping_combos(['1','2','3'], mapping))
     print(all_combos([1,2,3]))
     # print(combos([1,2,3]))

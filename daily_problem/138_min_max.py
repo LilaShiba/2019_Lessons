@@ -4,6 +4,8 @@
 
 arr = [4,9,2,10,-1,14,8]
 
+
+
 def find_min_max(arr):
     min_arr = max_arr = arr[0]
     
@@ -32,3 +34,4 @@ def r_min_max(arr):
     
 print(find_min_max(arr))
 print(r_min_max(arr))
+

@@ -124,3 +124,42 @@ def make_trie(words):
             
 words = ['taco', 'cat', 'tacocat']
 print(make_trie(words))
+
+import random, pprint
+ 
+maze = [[random.randint(0,10) for x in range(5)]for y in range(5)]
+
+def next_moves(maze, node):
+    r = len(maze)
+    c = len(maze[0])
+    x,y = node
+    to_check = ((x+1, y), (x-1, y), (x, y-1), (x, y+1))
+    real_neighbors = ((cx,cy) for (cx, cy) in to_check if 0<= cx < r and 0<= cy < c)
+    return real_neighbors
+
+def bfs(maze, start, end):
+    queue = [[start]]
+    visited = []
+    
+    while queue:
+        path = queue.pop(0)
+        node = path[-1]
+        if node == end:
+            return path
+        
+        x,y = node
+        edges = next_moves(maze, (x,y))
+        print("edges", edges)
+        for edge in edges:
+            print(edge)
+            if edge not in visited:
+                visited.append(edge)
+                new_list = list(path)
+                new_list.append(edge)
+                queue.append(new_list)
+    return False
+
+print(bfs(maze, (0,0), (4,4)))
+
+
+        

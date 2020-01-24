@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-username = "email"
-password = "password"
+username = """
+password = ""
+csrfmiddlewaretoken= ""
 
 
  
@@ -23,5 +24,17 @@ with requests.session() as s:
     "csrfmiddlewaretoken": csrfmiddlewaretoken
     }
     r = s.post(login_url,data=login_info, headers={"Referer":"https://my.decoded.com"})
-    print(r.text)
+    #print(r.text)
+    # parse with bs4
+    r = s.get(url)
+    soup = BeautifulSoup(r.content, 'html5lib') 
+    my_divs = soup.findAll("div", {"class": 'attendee-container'})
+    #print(my_divs)
+    scores = []
+
+    score = soup.find("span", {"class": 'answer'})
+    scores.append(score)
+    print(scores)
+        
+    #section = soup.find_all(‘section’, class_=’facts-categories’)
 

@@ -7,6 +7,7 @@
 # 
 # What is the minimum number of swaps necessary for this to happen?
 
+import random
 def min_swaps(row):
     # get position of each person
     peoplePos = {idx:i for i,idx in enumerate(row)}
@@ -35,5 +36,74 @@ def min_swaps(row):
         else:
             idx+=1
     return ans
-r = [3, 2, 0, 1]
-print(min_swaps(r))
+
+
+def couple_swap(row: list) -> int:
+    person_location = {idx:person for person, idx in enumerate(row)}
+    get_partner = lambda x: x+1 if x%2 == 0 else x-1
+    
+    swaps = 0
+    idx = 0
+    
+    while idx < len(row):
+        # get current person
+        current = row[idx]
+        # get their partner num
+        partner = get_partner(current)
+        # get partner location via index
+        partner_idx = person_location[partner]
+        # get location of swap
+        swap_pos = partner_idx -1 if partner_idx % 2 != 0 else partner_idx + 1
+        location_of_swap = row[swap_pos]
+        # check to see if swap is needed
+        if swap_pos != idx:
+            # if need to swap, do so
+            row[idx], row[swap_pos] = row[swap_pos], row[idx]
+            # increment swaps count
+            swaps += 1
+            # update dict 
+            person_location[current], person_location[location_of_swap] = person_location[location_of_swap], person_location[current]
+        else:
+            #increment loop 
+            idx +=1
+    # return swap count
+    return swaps
+
+
+def swap_couples(row: list) -> int:
+    locations = {value:idx for idx, value in enumerate(row)}
+    get_partner = lambda x: x-1 if x%2 != 0 else x+1
+    
+    idx=ans=0
+    n = len(row)
+    while idx < n:
+        # get current value 
+        current = row[idx]
+        # get partner value 
+        pv = get_partner(current)
+        # get partner idx 
+        pl = locations[pv]
+        # get swap location 
+        sl = pl -1 if pl % 2 != 0 else pl + 1
+        # get value location of swap 
+        sl_v = row[sl]
+        # check if swap is needed 
+        if idx != sl:
+            ans +=1
+            # make swap 
+            row[idx], row[sl] = row[sl], row[idx]
+            # update dict 
+            locations[current], locations[sl_v] = locations[sl_v], locations[current]
+        else:
+            idx+=1
+    return ans
+        
+r = [3,5,1,6,7,8,2,9,0,4]
+print(min_swaps(r)) 
+r = [3,5,1,6,7,8,2,9,0,4]
+print(couple_swap(r)) 
+print(r)
+r = [3,5,1,6,7,8,2,9,0,4]
+print(r)
+
+print(swap_couples(r))      

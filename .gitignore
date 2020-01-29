@@ -1,0 +1,8 @@
+username = "kyle.james@decoded.com"
+password = "ArbeistheFuture2049!"
+csrfmiddlewaretoken= "VFnJviepaYScaSCICu4WDx90MevUx5Bg"
+
+
+ 
+login_url = "https://my.decoded.com/accounts/login/?next=/admin/login/%3Fnext%3D/admin/"
+url = "https://my.decoded.com/admin/apricot/course/5139/forms/"

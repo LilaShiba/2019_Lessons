@@ -13,3 +13,4 @@ def iterative_binary_search(arr,x):
     return False
     
 print(iterative_binary_search([12,15,16,18,20],20))
+print(iterative_binary_search([n = [5, 1, 2, 7, 3, 4], 4))
